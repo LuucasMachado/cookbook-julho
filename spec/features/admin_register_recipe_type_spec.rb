@@ -11,7 +11,8 @@ feature 'Admin register recipe_type' do
   end
 
   scenario 'and must fill in name' do
-    visit new_recipe_type_path
+    visit root_path
+    click_on 'Cadastrar tipo de receita'
     fill_in 'Nome', with: ''
     click_on 'Enviar'
 

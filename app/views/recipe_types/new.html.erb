@@ -1,11 +1,9 @@
 <% if flash[:alert] %>
   <div class="alert"><%= flash[:alert] %></div>
 <% end %>
-
 <%= form_for @recipe_type do |f| %>
 
   <%= f.label :name, 'Nome' %>:
   <%= f.text_field :name %>
-
   <%= f.submit 'Enviar' %>
 <% end %>

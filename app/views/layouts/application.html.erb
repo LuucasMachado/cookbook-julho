@@ -10,6 +10,22 @@
   </head>
 
   <body>
+    <% if flash[:alert] %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+    <li class="nav-item">
+      <% if user_signed_in? %>
+      <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Entrar', new_user_session_path %>
+      <% end %>
+    </li>
+    <%= form_tag(search_path, method: "get") do %>
+      <%= label_tag(:q, "Busca por receita:") %>
+      <%= text_field_tag(:q) %>
+      <%= submit_tag("Buscar") %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

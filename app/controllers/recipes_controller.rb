@@ -10,7 +10,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to @recipe
     else 
-      flash[:alert] = "Você deve informar todos os dados da receita"
+      flash[:alert] = "Você deve informar o nome do tipo de receita"
       render :new
     end
   end
@@ -23,7 +23,7 @@ class RecipesController < ApplicationController
     if @recipe.update(recipe_params)
       redirect_to @recipe
     else
-      flash[:alert] = "Você deve informar todos os dados da receita"
+      flash[:alert] = "Não foi possível salvar a receita"
       render :edit
     end
   end
@@ -39,6 +39,10 @@ class RecipesController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    @recipes = Recipe.where("title LIKE ?", "%#{params[:q]}%")
+  end  
+
   private
 
   def recipe_type_all
@@ -50,6 +54,6 @@ class RecipesController < ApplicationController
   end
     
   def recipe_params
-    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine, :difficulty, :cook_time, :ingredients, :cook_method)
+    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id, :difficulty, :cook_time, :ingredients, :cook_method)
   end
 end

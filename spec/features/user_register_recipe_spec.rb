@@ -5,6 +5,7 @@ feature 'User register recipe' do
     #cria os dados necessários, nesse caso não vamos criar dados no banco
     RecipeType.create(name: 'Sobremesa')
     RecipeType.create(name: 'Entrada')
+    Cuisine.create(name: 'Arabe')
 
     # simula a ação do usuário
     visit root_path
@@ -12,7 +13,7 @@ feature 'User register recipe' do
 
     fill_in 'Título', with: 'Tabule'
     select 'Entrada', from: 'Tipo da Receita'
-    fill_in 'Cozinha', with: 'Arabe'
+    select 'Arabe', from: 'Cozinha'
     fill_in 'Dificuldade', with: 'Fácil'
     fill_in 'Tempo de Preparo', with: '45'
     fill_in 'Ingredientes', with: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha'
@@ -39,7 +40,6 @@ feature 'User register recipe' do
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: ''
-    fill_in 'Cozinha', with: ''
     fill_in 'Dificuldade', with: ''
     fill_in 'Tempo de Preparo', with: ''
     fill_in 'Ingredientes', with: ''
@@ -47,6 +47,6 @@ feature 'User register recipe' do
     click_on 'Enviar'
 
 
-    expect(page).to have_content('Não foi possível salvar a receita')
+    expect(page).to have_content('Você deve informar o nome do tipo de receita')
   end
 end

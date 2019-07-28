@@ -2,28 +2,34 @@
   <div class="alert"><%= flash[:alert] %></div>
 <% end %>
 
-<%= form_for @recipe do |f| %>
-
-  <%= f.label :title, 'Título' %>:
-  <%= f.text_field :title %>
-
-  <%= f.label :recipe_type_id, 'Tipo da Receita' %>:
-  <%= f.collection_select(:recipe_type_id, @recipe_type, :id, :name) %>
-
-  <%= f.label :cuisine, 'Tipo da Cozinha' %>:
-  <%= f.text_field :cuisine %>
-  
-  <%= f.label :difficulty, 'Dificuldade' %>:
-  <%= f.text_field :difficulty %>
-
-  <%= f.label :cook_time, 'Tempo de Preparo' %>:
-  <%= f.text_field :cook_time %>
-
-  <%= f.label :ingredients, 'Ingredientes' %>:
-  <%= f.text_field :ingredients %>
-  
-  <%= f.label :cook_method, 'Como Preparar' %>:
-  <%= f.text_field :cook_method %>
-
-  <%= f.submit 'Enviar uma receita' %>
+<%= form_with model: @recipe, data: { remote: false } do |f| %>
+  <div class="form-group">
+    <%= f.label :title, 'Título' %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :recipe_type_id, 'Tipo da Receita' %>
+    <%= f.collection_select :recipe_type_id, RecipeType.all, :id, :name, {}, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cuisine_id, 'Cozinha' %>
+    <%= f.collection_select :cuisine_id, Cuisine.all, :id, :name, {}, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :difficulty, 'Dificuldade' %>
+    <%= f.text_field :difficulty, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cook_time, 'Tempo de Preparo' %>
+    <%= f.text_field :cook_time, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :ingredients, 'Ingredientes' %>
+    <%= f.text_area :ingredients, class: 'form-control', row: '3' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cook_method, 'Como Preparar' %>
+    <%= f.text_area :cook_method, class: 'form-control', row: '3' %>
+  </div>
+  <%= f.submit 'Enviar', class: 'btn btn-primary' %>
 <% end %>
