@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :cuisines
   resources :recipes
   resources :recipe_types, only: %i[show new create]
-  resources :list
+  resources :lists
   get 'search', to: "recipes#search"
   get 'profile', to: "users#profile"
 end
