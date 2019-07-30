@@ -1,6 +1,8 @@
 class Recipe < ApplicationRecord
   belongs_to :recipe_type 
   belongs_to :cuisine
+  belongs_to :user
+  has_one_attached :photo
   has_many :recipes_list
   has_many :list, through: :recipes_list
   validates :title, :recipe_type, :cuisine, :difficulty, :cook_time,

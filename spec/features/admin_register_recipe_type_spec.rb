@@ -2,8 +2,7 @@ require 'rails_helper'
 
 feature 'Admin register recipe_type' do
   scenario 'successfully' do
-    user = User.create(email: 'lucas@gmail.com', password: '123456') 
-
+    user = User.create(email: 'lucas@exemplo.com', password: '123456')
     login_as(user, scope: :user)
     visit root_path
     click_on 'Cadastrar tipo de receita'
@@ -14,11 +13,7 @@ feature 'Admin register recipe_type' do
   end
 
   scenario 'and must fill in name' do
-    user = User.create(email: 'lucas@gmail.com', password: '123456') 
-
-    login_as(user, scope: :user)
-    visit root_path
-    click_on 'Cadastrar tipo de receita'
+    visit new_recipe_type_path
     fill_in 'Nome', with: ''
     click_on 'Enviar'
 

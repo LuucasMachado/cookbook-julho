@@ -1,18 +1,19 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:update, :edit, :show, :destroy]
   before_action :recipe_type_all, only: [:edit, :new]
+  before_action :authenticate_user!, only: %i[new create edit update]
   def index
     @recipes = Recipe.all
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
-    if @recipe.save
-      redirect_to @recipe
-    else 
-      flash[:alert] = "Você deve informar o nome do tipo de receita"
-      render :new
-    end
+    @recipe.user = current_user
+    return redirect_to @recipe if @recipe.save
+
+    @recipe_types = RecipeType.all
+    @cuisines = Cuisine.all
+    render :new
   end
 
   def new
@@ -54,6 +55,6 @@ class RecipesController < ApplicationController
   end
     
   def recipe_params
-    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id, :difficulty, :cook_time, :ingredients, :cook_method)
+    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id, :difficulty, :cook_time, :ingredients, :cook_method, :photo)
   end
 end
