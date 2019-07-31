@@ -1,4 +1,6 @@
 class List < ApplicationRecord
-    has_many :recipes_list
-    has_many :recipes, through: :recipes_list
+    belongs_to :user
+    
+    has_many :list_recipes
+    has_many :recipes, through: :list_recipes
 end

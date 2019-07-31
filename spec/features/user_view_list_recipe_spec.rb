@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User view list' do
   scenario 'successfully' do
     user = User.create(email: 'lucas@exemplo.com', password: '123456')
-    recipe_type = RecipeType.create(name: 'Sobremesa')
+    recipe_type = RecipeType.create(name: 'Sobremesasssas2')
     cuisine = Cuisine.create(name: 'Brasileira')
     recipe = Recipe.create(title: 'Bolo de cenoura', difficulty: 'Médio',
                            recipe_type: recipe_type, cuisine: cuisine,
@@ -13,11 +13,11 @@ feature 'User view list' do
                            cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
 
     Recipe.create(title: 'Bolo de banana', difficulty: 'Médio',
-    recipe_type: recipe_type, cuisine: cuisine,
-    cook_time: 50,
-    user: user,
-    ingredients: 'Farinha, açucar, cenoura',
-    cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
+                  recipe_type: recipe_type, cuisine: cuisine,
+                  cook_time: 50,
+                  user: user,
+                  ingredients: 'Farinha, açucar, cenoura',
+                  cook_method: 'Cozinhe a cenoura, corte em pedaços pequenos, misture com o restante dos ingredientes')
    
     list = List.create(name: 'Natal', user: user)
     list_recipe =  RecipesList.create(list: list, recipe: recipe)
